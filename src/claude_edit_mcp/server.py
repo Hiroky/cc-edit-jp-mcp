@@ -47,8 +47,8 @@ async def edit_file(
         # Replace the string
         new_content = content.replace(old_string, new_string, 1)
 
-        # Write back with UTF-8 encoding
-        path.write_text(new_content, encoding="utf-8")
+        # Write back with UTF-8 encoding and LF line endings
+        path.write_text(new_content, encoding="utf-8", newline='\n')
 
         return {
             "success": True,
@@ -83,8 +83,8 @@ async def write_file(
         # Create parent directories if they don't exist
         path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Write file with UTF-8 encoding
-        path.write_text(content, encoding="utf-8")
+        # Write file with UTF-8 encoding and LF line endings
+        path.write_text(content, encoding="utf-8", newline='\n')
 
         return {
             "success": True,
@@ -98,7 +98,7 @@ async def write_file(
         }
 
 
-@app.tool()
+# @app.tool()
 async def replace_line(
     file_path: str,
     start_line: int,
@@ -152,7 +152,7 @@ async def replace_line(
         # Replace
         new_content_full = content[:start_pos] + new_content + content[end_pos:]
 
-        path.write_text(new_content_full, encoding="utf-8")
+        path.write_text(new_content_full, encoding="utf-8", newline='\n')
 
         return {
             "success": True,
