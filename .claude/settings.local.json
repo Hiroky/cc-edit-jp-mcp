@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run python test_server.py)",
+      "WebFetch(domain:gofastmcp.com)",
+      "WebFetch(domain:github.com)",
+      "Bash(python -c \"import fastmcp; print(fastmcp.__version__)\")",
+      "Bash(where python)",
+      "Bash(C:UsersblackAppDataLocalMicrosoftWindowsAppspython.exe -c \"import fastmcp; print(fastmcp.__version__)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
