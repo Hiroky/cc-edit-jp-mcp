@@ -19,29 +19,30 @@ def spaces_to_tabs(content: str, spaces: int = 4) -> str:
     """
     Convert spaces to tabs in content.
     
-    Converts sequences of N spaces at the beginning of lines to tabs,
-    where N is the spaces parameter (default: 4).
+    Converts leading spaces at the beginning of lines to tabs,
+    where sequences of N spaces are converted to tabs, and any remaining
+    spaces are left as spaces for position adjustment.
     
     Args:
         content: The content to convert
         spaces: Number of spaces to treat as one tab (default: 4)
     
     Returns:
-        Content with spaces converted to tabs
+        Content with leading spaces converted to tabs, preserving remaining spaces
     """
     lines = content.split('\n')
     converted_lines = []
-    space_str = ' ' * spaces
     
     for line in lines:
-        # Count leading spaces in multiples of spaces parameter
+        # Count leading spaces
         leading_spaces = len(line) - len(line.lstrip(' '))
         
-        if leading_spaces > 0 and leading_spaces % spaces == 0:
-            # Replace leading spaces with tabs
+        if leading_spaces > 0:
+            # Convert leading spaces to tabs and remaining spaces
             num_tabs = leading_spaces // spaces
+            remaining_spaces = leading_spaces % spaces
             rest_of_line = line[leading_spaces:]
-            converted_line = '\t' * num_tabs + rest_of_line
+            converted_line = '\t' * num_tabs + ' ' * remaining_spaces + rest_of_line
             converted_lines.append(converted_line)
         else:
             converted_lines.append(line)
