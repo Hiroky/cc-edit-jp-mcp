@@ -42,7 +42,7 @@ async def edit_file(
         new_string: Replacement string (using 4 spaces for indentation)
 
     Returns:
-        Dictionary with success status and message
+        Dictionary with success status (and error message on failure)
     """
     try:
         path = Path(file_path)
@@ -84,8 +84,6 @@ async def edit_file(
 
         return {
             "success": True,
-            "message": "File edited successfully",
-            "file_path": str(path.resolve()),
         }
     except Exception as e:
         logging.error(f"Error editing file {file_path}: {str(e)}")
